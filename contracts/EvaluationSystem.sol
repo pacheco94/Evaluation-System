@@ -69,6 +69,7 @@ contract EvaluationSystem {
   //function where the student requests revision of the notes
   function sheckGrades(string calldata _id) public {
     revision.push(_id);
+    emit ReviewNote(_id);
   }
 
     //function that allows the teacher to see the students who have requested revision of grades
