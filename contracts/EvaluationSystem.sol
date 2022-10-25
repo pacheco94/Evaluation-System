@@ -47,6 +47,8 @@ contract EvaluationSystem {
 
   //function to evaluate
   function evaluate(string calldata _name, string calldata _id, uint256 _grades) public onlyteacher(msg.sender) {
+    
+    // We optimize gas running a new Students array, outside the EVM
     Students[] memory newliststudents = liststudents;
     for(uint256 i = 0; i < newliststudents.length; i = unsafe(1)){
       require(keccak256(abi.encodePacked(_id)) != keccak256(abi.encodePacked(newliststudents[i].id)),"The student is already evaluated!");
