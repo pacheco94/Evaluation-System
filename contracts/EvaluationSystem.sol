@@ -68,9 +68,9 @@ contract EvaluationSystem {
 
   //function where the student requests revision of the notes
   function sheckGrades(string memory _id) public {
-    Students[] memory newliststudents = liststudents;
-    for(uint i = 0; i < newliststudents.length; i = unsafe(i)){
-      require(keccak256(abi.encodePacked(newliststudents[i].id)) != keccak256(abi.encodePacked(_id)),"You already asked for review!");
+    string[] memory newrevision = revision; 
+    for(uint i = 0; i < newrevision.length; i = unsafe(i)){
+      require(keccak256(abi.encodePacked(newrevision[i])) != keccak256(abi.encodePacked(_id)),"You already asked for review!");
     }
     revision.push(_id);
     emit ReviewNote(_id);
