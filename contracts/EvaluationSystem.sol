@@ -68,6 +68,10 @@ contract EvaluationSystem {
 
   //function where the student requests revision of the notes
   function sheckGrades(string calldata _id) public {
+    Students[] memory newliststudents = liststudents;
+    for(uint i = 0; i < newliststudents.length; i = unsafe(i)){
+      require(newliststudents[i].id != _id,"You already asked for review!");
+    }
     revision.push(_id);
     emit ReviewNote(_id);
   }
