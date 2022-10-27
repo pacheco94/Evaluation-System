@@ -10,7 +10,7 @@ const { expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
 contract("EvaluationSystem", function (accounts) {
   console.log('Accounts', accounts);
 
-    let names = ['Juan'];
+    //let names = [Juan];
 
      beforeEach("Deployed", async () => {
        this.instance = await EvaluationSystem.deployed();
@@ -34,7 +34,7 @@ contract("EvaluationSystem", function (accounts) {
    it('Should emit event EvaluateStudent', async () => {
     let receipt = await this.instance.evaluate('Juan','13',10,{from:accounts[0]});
       //console.log(receipt.logs);
-     expectEvent(receipt,'EvaluateStudent',{name:'Juan'});
+     expectEvent(receipt,'EvaluatedStudent',{name:'Juan'});
    });   
 
    //testing Revision function
@@ -42,6 +42,12 @@ contract("EvaluationSystem", function (accounts) {
     let _sheck = await this.instance.sheckGrades('12');
     let _revision = await this.instance.Revision.call({from:accounts[0]});
       expect(_revision, _sheck);
+   });
+
+   //testing event ReviewNote
+   it('Should emit event ReviewNote', async () => {
+      let receipt = await this.instance.sheckGrades('14');
+      await expectEvent(receipt,'ReviewNote',{id:'14'});
    });
 
    //testing revert
