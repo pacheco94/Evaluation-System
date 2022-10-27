@@ -22,10 +22,10 @@ contract EvaluationSystem {
   string[] revision;
 
  // Event evaluated students
-  event EvaluatedStudent(bytes32); 
+  event EvaluatedStudent(string name); 
 
   //event to check grades
-  event ReviewNote(string); 
+  event ReviewNote(string id); 
 
   constructor ()  {
 
@@ -41,7 +41,7 @@ contract EvaluationSystem {
   
   // Teacher only modifier
   modifier onlyteacher(address teachAddr) {
-    require(msg.sender == professor,"You don't have permissions!");
+    require(msg.sender == professor,"You dont have permissions!");
     _;
   }
 
@@ -56,11 +56,8 @@ contract EvaluationSystem {
     liststudents.push(Students(_name, _id, _grades));
     dataStudents[_id] = Students(_name, _id, _grades);
 
-    //Student hash
-    bytes32 studenthash = keccak256(abi.encodePacked(_name, _id));
-
     // emit event evaluated student
-    emit EvaluatedStudent(studenthash);
+    emit EvaluatedStudent( _name);
   }
 
   //fuction for the student to see his grades
